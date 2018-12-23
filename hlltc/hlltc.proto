@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "hlltc";
+
+service Estimator {
+    rpc Estimate(EstimateRequest) returns (EstimateReply) {}
+}
+
+message EstimateRequest {
+    bytes sketch = 1;
+}
+
+message EstimateReply {
+    uint64 sum = 1;
+}
+
+service Merger {
+    rpc Merge(MergeRequest) returns (MergeReply) {}
+}
+
+message MergeRequest {
+    bytes sketch = 1;
+    repeated bytes sketches = 3;
+}
+
+message MergeReply {
+    bytes merged_sketch = 1;
+}
